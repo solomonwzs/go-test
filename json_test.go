@@ -13,7 +13,7 @@ type hello_s struct {
 	World string `json:"world"`
 }
 
-func BenchmarkJson0(b *testing.B) {
+func _BenchmarkJson0(b *testing.B) {
 	m := map[string]string{
 		"hello": "123",
 		"world": "345",
@@ -23,21 +23,21 @@ func BenchmarkJson0(b *testing.B) {
 	}
 }
 
-func BenchmarkJson1(b *testing.B) {
+func _BenchmarkJson1(b *testing.B) {
 	m := hello_s{"123", "456"}
 	for i := 0; i < b.N; i++ {
 		json.Marshal(m)
 	}
 }
 
-func BenchmarkJson2(b *testing.B) {
+func _BenchmarkJson2(b *testing.B) {
 	f := `{"hello":"%s","world":"%s"}`
 	for i := 0; i < b.N; i++ {
 		_ = []byte(fmt.Sprintf(f, "123", "456"))
 	}
 }
 
-func BenchmarkJson3(b *testing.B) {
+func _BenchmarkJson3(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		buf := &bytes.Buffer{}
 		buf.WriteString(`{"hello":"`)
@@ -49,7 +49,7 @@ func BenchmarkJson3(b *testing.B) {
 	}
 }
 
-func BenchmarkJson4(b *testing.B) {
+func _BenchmarkJson4(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		b := &strings.Builder{}
 		b.WriteString(`{"hello":"`)
